@@ -1,0 +1,26 @@
+<canvas id='noisy-canvas'></canvas>
+
+<script id='vertex-shader' type='x-shader/x-vertex'>
+    precision highp float;
+
+    attribute vec2 a_position;
+
+    void main() {
+        gl_Position = vec4(a_position, 0, 1);
+    }
+</script>
+
+
+<script id='fragment-shader' type='x-shader/x-fragment'>
+    precision highp float;
+    
+    uniform float u_time;
+
+    float rand(vec2 v) {
+        return fract(sin(dot(v.xy, vec2(12.9898,78.233))) * 43758.5453);
+    }
+
+    void main() {
+        gl_FragColor = vec4(vec3(rand(gl_FragCoord.xy + u_time)), 1.0);
+    } 
+</script>
